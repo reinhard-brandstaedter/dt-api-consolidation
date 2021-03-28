@@ -1,0 +1,105 @@
+# environment variables expected by this compose file:
+# - REGISTRY: a valid registry url for pushing images built by this compose
+# 
+# When using the apiproxy nginx reverse proxy, it will also create a valid certificate (and refresh it)
+# I'm using AWS route53 for DNS and the validation checks so if you want to use this as well you will
+# need to configure/provide your AWS credentials that are able to manage route53.
+# You will need additional config directories/files - see README:
+# - docker/accounts : place your let's encrypt account information here (a directory for the account containing account_id.json, accound_key.pem, registration_info.json)
+# - docker/aws: place your AWS credentials here for route53 APi access (config, credentials, credentials.csv)
+# - docker/certs: empty directory containing the let's encrypt certificates (once created)
+#
+# If not, please discard the apiproxy container but be aware that then there is no encryption used when
+# directly talking to the consolidated api (not recommended).
+# When running in K8s please use your ingress controller & certificates - no need for own managed certs
+# within the apiproxy.
+
+version: "3.5"
+services:
+
+  apigateway:
+    image: ${REGISTRY}/apigateway:${TAG}
+    container_name: apigateway
+    build:
+      context: ./apigateway
+    expose:
+      - 8080
+    environment:
+      - "PYTHONUNBUFFERED=1"
+    networks:
+      - frontend
+      - backend
+    ulimits:
+      nofile:
+        soft: "60000"
+        hard: "60000"
+    restart: always
+    logging:
+      options:
+        max-size: 50m
+      
+  apiproxy:
+    image: ${REGISTRY}/apiproxy:${TAG}
+    container_name: apiproxy
+    build:
+      context: ./apiproxy
+    ports:
+      - "4443:4443"
+    volumes:
+      - ./aws:/root/.aws
+      - ./certs:/etc/dehydrated/certs
+      - ./accounts:/etc/dehydrated/accounts
+      - ${PWD}/apiproxy/.htpasswd:/etc/nginx/.htpasswd
+    environment:
+      - "AWS_PROFILE=default"
+    networks:
+      - frontend
+    restart: always
+    logging:
+      options:
+        max-size: 50m
+    
+  tenantcache:
+    image: ${REGISTRY}/tenantcache:${TAG}
+    container_name: tenantcache
+    build:
+      context: ./tenantcache
+    environment:
+      - "PYTHONUNBUFFERED=1"
+    networks:
+      - backend
+    ulimits:
+      nofile:
+        soft: "12000"
+        hard: "12000"
+    sysctls:
+      net.core.somaxconn: 1024
+    restart: always
+    logging:
+      options:
+        max-size: 50m
+
+  tenantmanager:
+    image: ${REGISTRY}/tenantmgr:${TAG}
+    container_name: tenantmanager
+    build:
+      context: ./tenantmanager
+    environment:
+      - "PYTHONUNBUFFERED=1"
+    volumes:
+      - ${PWD}/tenantmanager/config.json:/config/config.json
+    depends_on:
+      - apigateway
+      - tenantcache
+    networks:
+      - backend
+    restart: always
+    logging:
+      options:
+        max-size: 50m
+      
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge

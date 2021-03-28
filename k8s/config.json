@@ -1,0 +1,31 @@
+{
+    "clusters" :
+    [
+        { "id": "MyFirstTenant",
+          "type": "partner",
+          "mode": "saas",
+          "url": "https://<first tenantid>.live.dynatrace.com",
+          "token": "<tokenmanagment token",
+          "name" : "<any name for the tokens that will be generated - e.g. dt-consolidationapi"
+        },
+        {
+          "id": "MySecondTenant",
+          "type": "customer",
+          "mode": "saas",
+          "url": "https://<second tenantid>.live.dynatrace.com",
+          "token": "<tokenmanagment token",
+          "name" : "<any name for the tokens that will be generated - e.g. dt-consolidationapi"
+        },
+        {
+          "id": "MyManagedCluster",
+          "type": "mymanaged",
+          "mode": "manged",
+          "url": "https://<managed tenantid>.dynatrace.com/",
+          "token": "<tokenmanagment token",
+          "name" : "<any name for the tokens that will be generated - e.g. dt-consolidationapi"
+        }
+    ],
+    "tokenduration": 43200,
+    "scaninterval": 300,
+    "apigateway": "http://apigateway:8080"
+  }

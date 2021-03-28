@@ -1,0 +1,6 @@
+k8s/htpasswd
+docker/apiproxy/.htpasswd
+docker/aws/**
+docker/accounts/**/*
+docker/certs/**
+
