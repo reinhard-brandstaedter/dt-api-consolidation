@@ -29,8 +29,7 @@ COPY ./crontab /etc/crontab
 RUN crontab /etc/crontab
 RUN touch /var/log/cron
 
-COPY nginx.conf /etc/nginx/nginx.conf
-RUN sed -i s/DOMAINNAME/$(cat /etc/dehydrated/domains.txt)/g /etc/nginx/nginx.conf
+COPY nginx.template /etc/nginx/nginx.template
 #RUN mkdir -p /etc/dehydrated/certs/$(cat /etc/dehydrated/domains.txt)
 # Generate a .htpassword file for basic auth
 # RUN printf "${API_USER}:$(openssl passwd -apr1 ${API_PWD})\n" >> /etc/nginx/.htpasswd

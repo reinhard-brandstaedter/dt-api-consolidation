@@ -51,9 +51,12 @@ services:
       - ./aws:/root/.aws
       - ./certs:/etc/dehydrated/certs
       - ./accounts:/etc/dehydrated/accounts
-      - ${PWD}/apiproxy/.htpasswd:/etc/nginx/.htpasswd
+      - ${PWD}/apiproxy/.htpasswd:/etc/nginx/htpasswd
     environment:
       - "AWS_PROFILE=default"
+      - "INT_TENANTCACHE=${INT_TENANTCACHE}"
+      - "INT_API_GATEWAY=${INT_API_GATEWAY}"
+      - "DOMAIN=${DOMAIN}"
     networks:
       - frontend
     restart: always
