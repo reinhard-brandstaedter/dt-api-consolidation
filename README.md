@@ -30,7 +30,7 @@ DOMAIN=dtapi.dy.natrace.it                  # the domain name used for Let's enc
 API_HOST=https://dtapi.local:8443           # the (public) url of the consolidated API to access
 LOG_LEVEL=info
 
-REGISTRY=rweber
+REGISTRY=360performance
 TAG=latest
 ```
 
