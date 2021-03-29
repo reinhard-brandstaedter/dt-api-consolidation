@@ -4,7 +4,7 @@ events {
 
 http { 
     upstream apigw { 
-        server ${API_GATEWAY}; 
+        server ${INT_API_GATEWAY}; 
         ip_hash;
     }
 

@@ -24,7 +24,7 @@ tenantcache = redis.StrictRedis(host=redishost.split(":")[0], port=redishost.spl
 configfile = '/config/config.json'
 tokenduration = 14400
 scaninterval = 120
-apigateway = os.getenv('INT_API_GATEWAY', "http://localhost:8080")
+apigateway = "http://" + os.getenv('INT_API_GATEWAY', "localhost:8080")
 tenant_token_types = ["DataExport","WriteConfig","ReadConfig","CaptureRequestData","DataPrivacy","MaintenanceWindows","ExternalSyntheticIntegration","PluginUpload","ReadAuditLogs","InstallerDownload","metrics.read","entities.read","entities.write","networkZones.read","networkZones.write","activeGates.read","activeGates.write"]
 
 def createSaasTenantToken():
