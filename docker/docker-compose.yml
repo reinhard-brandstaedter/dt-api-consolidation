@@ -56,7 +56,7 @@ services:
       - "AWS_PROFILE=default"
       - "INT_TENANTCACHE=${INT_TENANTCACHE}"
       - "INT_API_GATEWAY=${INT_API_GATEWAY}"
-      - "DOMAIN=${DOMAIN}"
+      - "DOMAINNAME=${DOMAIN}"
     networks:
       - frontend
     restart: always

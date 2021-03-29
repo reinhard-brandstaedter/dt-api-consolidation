@@ -21,6 +21,7 @@ fi
 # Start cron
 cron
 
-envsubst < /etc/nginx/nginx.template > /etc/nginx/nginx.conf
+sed -i s/DOMAINNAME/$(cat /etc/dehydrated/domains.txt)/g /etc/nginx/nginx.conf
+sed -i 's/INT_API_GATEWAY/'"${INT_API_GATEWAY}"'/g' /etc/nginx/nginx.conf
 
 nginx -g 'daemon off;' "$@"
