@@ -24,14 +24,14 @@ If you don't hava  K8s cluster available, the easiest way to run the consolidate
 In the docker directory create a ```.env``` file to add some configuration:
 
 ```
-INT_API_GATEWAY=http://apigateway:8080      # leave http://apigateway:8080 when running in Docker (the devault container name)
-INT_TENANTCACHE=tenantcache:6379            # leave tenantcache:6379 when running in Docker (the default container name of the redic cache)
+INT_API_GATEWAY=apigateway:8080             # leave set to _apigateway:8080_ when running in Docker (the devault container name)
+INT_TENANTCACHE=tenantcache:6379            # leave set to _tenantcache:6379_ when running in Docker (the default container name of the redic cache)
 DOMAIN=dtapi.dy.natrace.it                  # the domain name used for Let's encrypt certificates of the apiproxy nginx
-API_HOST=https://dtapi.local:8443           # the (public) hostname of the consolidated API to access
+API_HOST=https://dtapi.local:8443           # the (public) url of the consolidated API to access
 LOG_LEVEL=info
 
-REGISTRY=halfdome.local:50000/rweber
-TAG=2.7
+REGISTRY=rweber
+TAG=latest
 ```
 
 To protect unauthorized access to the consolidated API create a _.htpasswd_ file in the ```docker/apiproxy``` directory. You can add users/passwords to the _.htaccess_ file like this:
