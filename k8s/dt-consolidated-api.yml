@@ -23,23 +23,23 @@ spec:
     spec:
       containers:
         - name: tenantmanager
-          image: halfdome.local:50000/rweber/tenantmgr:2.7
+          image: 360performance/tenantmanager:1.0
           volumeMounts:
             - name: cfg-tenantmanager
               mountPath: "/config/config.json"
               subPath: config.json
               readOnly: true
         - name: apiproxy
-          image: halfdome.local:50000/rweber/apiproxy:2.7
+          image: 360performance/apiproxy:1.0
           volumeMounts:
             - name: htpasswd
               mountPath: "/etc/nginx/htpasswd"
               subPath: htpasswd
               readOnly: true
         - name: apigateway
-          image: halfdome.local:50000/rweber/apigateway:2.7
+          image: 360performance/apigateway:1.0
         - name: tenantcache
-          image: halfdome.local:50000/rweber/tenantcache:2.7
+          image: 360performance/tenantcache:1.0
 
       volumes:
         - name: cfg-tenantmanager

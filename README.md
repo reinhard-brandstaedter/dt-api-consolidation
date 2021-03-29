@@ -18,7 +18,7 @@ The consolidated API consists of 3 major components:
 ### Running the consolidated API
 Originally I ran the consolidated api with a Docker-Compose stack, but today I rather run it in K8s - your choice. The Docker-compose stack also contains a _apiproxy_ service which is used for SSL termination and access restrictions. (I've not built in any other authorization or authentication mechanisms than basic auth - assuming that the consolidated API will run in a protected environment). The _apiproxy_ service can also take care of getting valid public certificates via Let's Encrypt (see more below).
 
-#### With docker-compose
+#### Running with docker-compose
 If you don't hava  K8s cluster available, the easiest way to run the consolidated API service is to build fresh with docker-compose:
 
 In the docker directory create a ```.env``` file to add some configuration:
@@ -187,3 +187,4 @@ The result will look something like this:
 ]
 ```
 
+#### Running on K8s

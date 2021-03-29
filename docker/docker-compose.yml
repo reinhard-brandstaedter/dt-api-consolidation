@@ -85,7 +85,7 @@ services:
         max-size: 50m
 
   tenantmanager:
-    image: ${REGISTRY}/tenantmgr:${TAG}
+    image: ${REGISTRY}/tenantmanager:${TAG}
     container_name: tenantmanager
     build:
       context: ./tenantmanager
