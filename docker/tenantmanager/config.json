@@ -1,0 +1,15 @@
+{
+    "clusters" :
+    [
+      { "id": "360Perf",
+        "type": "partner",
+        "mode": "saas",
+        "url": "https://mfk00070.live.dynatrace.com",
+        "token": "<mytoken>",
+        "name" : "dtconsolidationapi"
+      }
+    ],
+    "tokenduration": 43200,
+    "scaninterval": 300,
+    "apigateway": "http://apigateway:8080"
+  }

@@ -18,12 +18,13 @@ logging.getLogger("requests").setLevel(logging.WARNING)
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-tenantcache = redis.StrictRedis(host='localhost', port=6379, db=0, charset="utf-8", decode_responses=True)
+redishost = os.getenv('INT_TENANTCACHE', 'localhost:6379')
+tenantcache = redis.StrictRedis(host=redishost.split(":")[0], port=redishost.split(":")[1], db=0, charset="utf-8", decode_responses=True)
 
 configfile = '/config/config.json'
 tokenduration = 14400
 scaninterval = 120
-apigateway = "http://localhost:8080"
+apigateway = os.getenv('INT_API_GATEWAY', "http://localhost:8080")
 tenant_token_types = ["DataExport","WriteConfig","ReadConfig","CaptureRequestData","DataPrivacy","MaintenanceWindows","ExternalSyntheticIntegration","PluginUpload","ReadAuditLogs","InstallerDownload","metrics.read","entities.read","entities.write","networkZones.read","networkZones.write","activeGates.read","activeGates.write"]
 
 def createSaasTenantToken():

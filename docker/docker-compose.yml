@@ -26,6 +26,8 @@ services:
       - 8080
     environment:
       - "PYTHONUNBUFFERED=1"
+      - "INT_TENANTCACHE=${INT_TENANTCACHE}"
+      - "INT_API_GATEWAY=${INT_API_GATEWAY}"
     networks:
       - frontend
       - backend
@@ -86,6 +88,8 @@ services:
       context: ./tenantmanager
     environment:
       - "PYTHONUNBUFFERED=1"
+      - "INT_TENANTCACHE=${INT_TENANTCACHE}"
+      - "INT_API_GATEWAY=${INT_API_GATEWAY}"
     volumes:
       - ${PWD}/tenantmanager/config.json:/config/config.json
     depends_on:

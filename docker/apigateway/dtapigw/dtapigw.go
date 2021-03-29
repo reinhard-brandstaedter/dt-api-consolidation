@@ -73,14 +73,22 @@ func clientInit(){
 	}
 }
 
+func getEnv(key, fallback string) string {
+    if value, ok := os.LookupEnv(key); ok {
+        return value
+    }
+    return fallback
+}
+
 func newPool() *redis.Pool {
+	redishost := getEnv("INT_TENANTCACHE","localhost:6379")
 	return &redis.Pool{
         MaxIdle: 2000,
 		MaxActive: 0, // max number of connections
 		//IdleTimeout: 30 * time.Second,
 		Wait: true,
         Dial: func() (redis.Conn, error) {
-            c, err := redis.Dial("tcp", "localhost:6379")
+            c, err := redis.Dial("tcp", redishost)
             if err != nil {
                     panic(err.Error())
             }
