@@ -31,6 +31,9 @@ spec:
               readOnly: true
         - name: apiproxy
           image: 360performance/apiproxy:1.0
+          env:
+            - name: INT_API_GATEWAY
+              value: localhost:8080
           volumeMounts:
             - name: htpasswd
               mountPath: "/etc/nginx/htpasswd"
