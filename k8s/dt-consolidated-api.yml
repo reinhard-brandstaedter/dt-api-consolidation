@@ -24,6 +24,7 @@ spec:
       containers:
         - name: tenantmanager
           image: 360performance/tenantmanager:1.0
+          imagePullPolicy: Always
           volumeMounts:
             - name: cfg-tenantmanager
               mountPath: "/config/config.json"
@@ -31,6 +32,7 @@ spec:
               readOnly: true
         - name: apiproxy
           image: 360performance/apiproxy:1.0
+          imagePullPolicy: Always
           env:
             - name: INT_API_GATEWAY
               value: localhost:8080
@@ -41,8 +43,10 @@ spec:
               readOnly: true
         - name: apigateway
           image: 360performance/apigateway:1.0
+          imagePullPolicy: Always
         - name: tenantcache
           image: 360performance/tenantcache:1.0
+          imagePullPolicy: Always
 
       volumes:
         - name: cfg-tenantmanager
