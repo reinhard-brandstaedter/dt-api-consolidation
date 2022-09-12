@@ -64,6 +64,7 @@ func clientInit(){
 	tr := &http.Transport{
 		// Disable HTTP/2. - leads to issues with API
         TLSNextProto: make(map[string]func(authority string, c *tls.Conn) http.RoundTripper),
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		MaxIdleConns: 8000,
         MaxIdleConnsPerHost: 8000,
 	}

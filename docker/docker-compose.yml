@@ -33,8 +33,8 @@ services:
       - backend
     ulimits:
       nofile:
-        soft: "60000"
-        hard: "60000"
+        soft: 60000
+        hard: 60000
     restart: always
     logging:
       options:
@@ -75,8 +75,8 @@ services:
       - backend
     ulimits:
       nofile:
-        soft: "12000"
-        hard: "12000"
+        soft: 12000
+        hard: 12000
     sysctls:
       net.core.somaxconn: 1024
     restart: always

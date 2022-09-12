@@ -21,7 +21,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 redishost = os.getenv('INT_TENANTCACHE', 'localhost:6379')
 tenantcache = redis.StrictRedis(host=redishost.split(":")[0], port=redishost.split(":")[1], db=0, charset="utf-8", decode_responses=True)
 
-configfile = '/config/config.json'
+configfile = os.getenv('CONFIG_FILE','/config/config.json')
+#configfile = '/config/config.json'
 tokenduration = 14400
 scaninterval = 120
 apigateway = "http://" + os.getenv('INT_API_GATEWAY', "localhost:8080")
@@ -44,7 +45,15 @@ tenant_token_types = [
     "activeGates.read",
     "activeGates.write",
     "slo.read",
-    "slo.write"
+    "slo.write",
+    "settings.read",
+    "settings.write",
+    "events.read",
+    "events.ingest",
+    "problems.read",
+    "problems.write",
+    "syntheticExecutions.write",
+    "syntheticExecutions.read"
 ]
 def createSaasTenantToken():
     pass
