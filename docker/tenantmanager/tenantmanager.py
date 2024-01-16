@@ -80,7 +80,7 @@ def createTenantAPITokens(**kwargs):
         tokendto = '{\
             "name": "configManagementMaster", \
             "personalAccessToken": false, \
-            "expirationDate": "now' + str(int(tokenduration/60)) +'m"\
+            "expirationDate": "now+' + str(int(tokenduration/60)) +'m", \
             "scopes": '+scopes+'\
         }'
         tokenkey = "token"
