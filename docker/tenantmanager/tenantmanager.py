@@ -76,13 +76,11 @@ def createTenantAPITokens(**kwargs):
         c_type = kwargs["c_type"]
 
     if mode == "saas":
-        url = apigateway+'/e/TENANTID/api/v1/tokens'
+        url = apigateway+'/e/TENANTID/api/v2/apiTokens'
         tokendto = '{\
             "name": "configManagementMaster", \
-            "expiresIn": { \
-                "value": '+str(tokenduration)+', \
-                "unit": "SECONDS" \
-            },\
+            "personalAccessToken": false, \
+            "expirationDate": "now' + str(int(tokenduration/60)) +'m"\
             "scopes": '+scopes+'\
         }'
         tokenkey = "token"
